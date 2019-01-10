@@ -1,4 +1,7 @@
 def ave(nums):
+	'''
+	计算平均值
+	'''
 	for num in nums:
 		num = float(num)
 	n = len(nums)

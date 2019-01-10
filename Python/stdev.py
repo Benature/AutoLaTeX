@@ -1,6 +1,11 @@
 from math import sqrt
 
 def std(nums,accurancy=5):
+	'''
+	nums: array of data
+	
+	accurancy: 精度, 默认五位有效数字
+	'''
 	for num in nums:
 		num = float(num)
 	n = len(nums)
