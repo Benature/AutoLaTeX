@@ -28,6 +28,3 @@ def linear_parameters(xs,ys):
 	r = (xybar - xbar*ybar)/(sqrt(xsqbar - xbar**2)*sqrt(ysqbar - ybar**2))
 	
 	return [a,b,sigma_a,sigma_b,r]
-	
-print(linear_parameters([2,3,4],[5,3,1]))
-
