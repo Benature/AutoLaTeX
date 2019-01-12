@@ -3,8 +3,8 @@ from math import sqrt
 import matplotlib.pyplot as plt
 
 def linear_parameters(xs,ys):
-	'''return a para. about the parameters [a,b,sigma_a,sigma_b],
-	 where b is the slope of linear fitting'''
+	'''return the parameters [a,b,sigma_a,sigma_b,r],
+	 where b is the slope of a linear fitting'''
 	n = len(xs)
 	xys = [xs[k]*ys[k] for k in range(n)]
 	xsqs = [xs[k]**2 for k in range(n)]
@@ -14,6 +14,7 @@ def linear_parameters(xs,ys):
 	ybar = sum(ys)/n
 	xybar = sum(xys)/n
 	xsqbar = sum(xsqs)/n
+	ysqbar = sum(ysqs)/n
 	
 	b = (xbar*ybar - xybar)/(xbar**2 - xsqbar)
 	a = ybar - b*xbar
@@ -24,6 +25,9 @@ def linear_parameters(xs,ys):
 	sigma_b = sigma_y/(sqrt(n*(xsqbar - xbar**2)))
 	sigma_a = sigma_b*sqrt(xsqbar)
 	
-	return [a,b,sigma_a,sigma_b]
+	r = (xybar - xbar*ybar)/(sqrt(xsqbar - xbar**2)*sqrt(ysqbar - ybar**2))
 	
-print(linear_parameters([2,3,1],[5,7,4]))
+	return [a,b,sigma_a,sigma_b,r]
+	
+print(linear_parameters([2,3,4],[5,3,1]))
+
