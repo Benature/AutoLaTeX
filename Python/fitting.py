@@ -43,8 +43,17 @@ def linear_eq(xs,ys):
 		b_up += '(' + str(xs[k]) + '-' + xbar + ')(' + str(ys[k]) + '-' + ybar + ')'
 	for k in range(n):
 		b_down += '(' + str(xs[k]) + '-' + xbar + ')^2'
+	#eqs for a and b	
 	b_eq = '\\frac{' + b_up + '}{' + b_down + '}'
 	a_eq = ybar + '-' + str(linear_parameters[1]) +'\\times' + xbar
+	
+	sigma_y_under = '('
+	for k in range(n):
+		sigma_y_under += '[' + str(ys[k]) + '-(' + str(linear_parameters[1]) + '+' + str(linear_parameters[0]) +')]^2 +'
+	sigma_y_under = sigma_y_under[:-1]
+	sigma_y_under += ']'
+	#eq for sigma_y
+	sigma_y_eq = '\\sqrt{\\frac{1}{' + str(n) + '-2}' + sigma_y_under + '}'
 	
 		
 		
