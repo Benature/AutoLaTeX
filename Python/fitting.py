@@ -1,6 +1,7 @@
 from math import sqrt
 
 import matplotlib.pyplot as plt
+from average import ave
 
 def linear_parameters(xs,ys):
 	'''return the parameters [a,b,sigma_a,sigma_b,r],
@@ -32,6 +33,21 @@ def linear_parameters(xs,ys):
 
 def linear_eq(xs,ys):
 	'''return the LaTeX eqs. of calculate parameters'''
+	n = len(xs)
+	xbar = sum(xs)/n
+	ybar = sum(ys)/n
+	xbar = str(xbar)
+	ybar = str(ybar)
+	b_up = ''
+	for k in range(n):
+		b_up += '(' + str(xs[k]) + '-' + xbar + ')(' + str(ys[k]) + '-' + ybar + ')'
+	for k in range(n):
+		b_down += '(' + str(xs[k]) + '-' + xbar + ')^2'
+	b_eq = '\\frac{' + b_up + '}{' + b_down + '}'
+	a_eq = ybar + '-' + str(linear_parameters[1]) +'\\times' + xbar
+	
+		
+		
 	
 	
 	
