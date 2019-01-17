@@ -28,3 +28,13 @@ def linear_parameters(xs,ys):
 	r = (xybar - xbar*ybar)/(sqrt(xsqbar - xbar**2)*sqrt(ysqbar - ybar**2))
 	
 	return [a,b,sigma_a,sigma_b,r]
+
+
+def linear_eq(xs,ys):
+	'''return the LaTeX eqs. of calculate parameters'''
+	
+	
+	
+	
+	
+	
