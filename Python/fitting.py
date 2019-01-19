@@ -72,6 +72,22 @@ def linear_eq(xs,ys):
 	sigma_a_under = sigma_a_under[:-1] + ')'
 	sigma_a_eq += '\\sqrt{' + sigma_a_under + '}'
 	
+	#eq for r
+	r_up = b_up
+	r_down = ''
+	for k in range(n):
+		r_down += '(' + str(xs[k]) + '-' + xbar + ')(' + str(ys[k]) + '-' + ybar +')'
+	r_down = '\\sqrt{' + r_down + '}'
+	r_eq = '\\frac{' + r_up + '}{' + r_down + '}'
+	
+	return [a_eq,b_eq,sigma_y_eq,sigma_a_eq,sigma_b_eq,r_eq]
+
+def linear_plot(xs,ys):
+	a = linear_parameters[0]
+	b = linear_parameters[1]
+	line_xs = [min(xs),max(xs)]
+	line_ys = [b*line_xs[k] + a for k in range(2)]
+	
 	
 		
 	
