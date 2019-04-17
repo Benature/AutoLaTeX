@@ -36,6 +36,7 @@ def write_table(df, typ = "tex"):
                         else  "{:^7}&".format(df.iloc[i][j])
             out = out[:-1] + "\\\\ \n\t\t\t"
         out = out[:-4] + '''
+\t\t\t\\bottomrule[1.5pt]
 \t\t\\end{tabular}
 \t}
 %\t\\caption{}
