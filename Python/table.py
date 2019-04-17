@@ -1,9 +1,14 @@
 def write_table(df, typ = "tex"):
     '''
-    df: dateframe
+    df: 
+    dateframe.
     
-    typ: type of output. "md" or "latex"/"tex"
-         default as "tex"
+    typ: 
+    type of output. "md" or "latex"/"tex".
+    default as "tex"
+
+    output:
+    number will be float if its head is not "index".
     '''
     header = list(df.columns)
     In, Jn = df.shape
