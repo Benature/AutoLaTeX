@@ -48,6 +48,8 @@ def write_table(df, typ = "tex", ilim=None, jlim=None):
         out = '''
 \\begin{table}[htbp]
 \t\\centering
+\t\\caption{}
+\t\\label{t:}
 \t\\scalebox{1}{
 \t\t\\begin{tabular}[c]{''' \
 + "".join(["c"]*(Jn-J0)) + \
@@ -73,8 +75,6 @@ def write_table(df, typ = "tex", ilim=None, jlim=None):
 \t\t\t\\bottomrule[1.5pt]
 \t\t\\end{tabular}
 \t}
-%\t\\caption{}
-%\t\\label{t:}
 \\end{table}
 '''
 
