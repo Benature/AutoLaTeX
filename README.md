@@ -1,7 +1,11 @@
 # AutoLaTeX
 
-Generate LaTeX code by Python.  
-In order to speed up finishing experimental report in *APS_  
+Generate LaTeX code by Python for experiment report.
 
-用Python生成LaTeX代码.  
-用以加快完成 *某养殖场山上的温泉学院* 的实验报告=-=
+用Python生成LaTeX代码写实验报告。  
+
+## Features
+
+- 读取excel等表格文件转为latex表格
+- 线性拟合等
+- etc
