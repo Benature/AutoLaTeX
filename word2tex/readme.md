@@ -31,6 +31,8 @@
     python3 word2tex.py
     ```
 
+4. **手动修改**
+
 >如果觉得有帮助还请点个Star吧 :)
 
 ## TODO List
