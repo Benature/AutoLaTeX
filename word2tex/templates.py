@@ -27,7 +27,7 @@ template_figure = '''
     \\centering 
     {}
     \\caption{{}}
-    \\label{{f:}}
+    \\label{{f:tu}}
 \\end{{figure}}
 '''
 
@@ -44,3 +44,31 @@ template_document = preamble + '''
 {}
 \\end{{document}}
 '''
+
+
+Unicode2Latex = {
+    "α": "alpha",
+    "∝": "alpha",
+    "𝜋": "pi",
+    "𝑑": "mathrm{d}",
+    "∆": "Delta",
+    "∫": "int",
+    "×": "times",
+    "ρ": "rho",
+    "Ω": "Omega",
+    "·": "cdot",
+    "→": "rightarrow",
+    "Σ": "Sigma",
+    
+}
+
+Unicode2Unicode = {
+    "°": "^\\circ",
+    "𝐸": "E",
+    "𝑣": "v",
+    "𝑁": "N",
+    "𝑍": "Z",
+    "𝑒": "e",
+    "𝐴": "A",
+    "𝐻": "H",
+}

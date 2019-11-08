@@ -6,6 +6,7 @@ delete_table_list = ["\\end{minipage}", "\\raggedright", "\\strut", "\\endhead"]
 
 
 def modify_re_table(table):
+    r'''render table'''
     table = table.group()
     for li in delete_table_list:
         table = table.replace(li, "")
@@ -27,11 +28,12 @@ def modify_re_table(table):
 
 
 def modify_re_section(section):
+    r'''render \section{}'''
     section = section.group()
     section = re.findall(r"(?=【).*?(?<=】)", section)[0]
     section = section.strip("【】")  # 蜜汁bug
     # print(section)
-    return "\\section{" + section + "}"
+    return "\n\\section{" + section + "}"
 
 
 def modify_re_figure(figure):
@@ -72,11 +74,33 @@ def modify_figure(tex_raw, policy="donot"):
 
 
 def get_exp_title(tex_raw):
-    exp_title = re.findall(r"实验 \w\d.*?\n", tex_raw)[0].rstrip("}\n")
+    '''get title'''
+    # exp_title = re.findall(r"实验 \w\d.*?\n", tex_raw)[0].rstrip("}\n")
+    exp_title = re.findall(r"实验 .*\d.*?\n", tex_raw)[0].rstrip("}\n")
+    print("Titile | ", exp_title)
     return "{" + exp_title + "}"
 
 
 def clean_useless(tex_raw):
     for item in delete_list:
         tex_raw = tex_raw.replace(item, "")
+    for i in re.findall(r"\\hypertarget.*", tex_raw):
+        print(i)
+        tex_raw = tex_raw.replace(i, "\n")
+    tex_raw = re.sub(r"\\hypertarget.*", "\n", tex_raw)
+    return tex_raw
+
+
+def modify_re_math(math):
+    math = math.group()
+    return "$" + math.lstrip("\\emph{").rstrip("}").replace("$", "") + "$"
+
+def math_latex(tex_raw):
+    for u, l in zip(Unicode2Latex.keys(), Unicode2Latex.values()):
+        tex_raw = tex_raw.replace(u, "$\\"+l+"$")
+    for u, l in zip(Unicode2Unicode.keys(), Unicode2Unicode.values()):
+        tex_raw = tex_raw.replace(u, ""+l+"")
+    tex_raw = re.sub(r"\\emph{.*?}", modify_re_math, tex_raw)
+    
+    # tex_raw = re.sub(r"\$[ ]*\$", "", tex_raw)
     return tex_raw
