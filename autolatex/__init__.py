@@ -1,6 +1,6 @@
 from . import table
-from . import maths
-from . import word2tex
+from .word2tex import word2tex
+from . import equation
 
 import argparse
 

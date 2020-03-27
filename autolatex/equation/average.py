@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def ave(nums, name, unit="mm"):
     '''
     计算平均值
