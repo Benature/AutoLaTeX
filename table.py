@@ -1,20 +1,53 @@
+import pandas as pd
+from platform import system
+
+SYSTEM = system()
+
+read_excel = pd.read_excel
+
 def isFloat(num):
     if "float" in str(type(num)):
-        return True  
-    else: 
+        return True
+    else:
         return False
 
-def write_table(df, typ = "tex", ilim=None, jlim=None):
+def setClipboardData(str):
+    if SYSTEM == 'Darwin':
+        import subprocess
+        data = bytes(str,'utf8')
+        p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
+        p.stdin.write(data)
+        p.stdin.close()
+        p.communicate()
+    elif SYSTEM == 'Windows':
+        import pyperclip
+        pyperclip.copy(str)
+    
+
+def convert(df, typ="tex", ilim=None, jlim=None, clipboard=True,
+            border='|', hline=True, caption='实验数据：'):
     '''
     df: dateframe
-    
-    typ: type of output. "md" or "latex"/"tex".   
+
+    typ[str]: type of output. "md" or "latex"/"tex".   
         Default as "tex"
 
-    ilim: row limits. Can be stop or (begin, stop)
+    ilim[list]: row limits. Can be stop or (begin, stop)
+
+    jlim[list]: vol limits. Can be stop or (begin, stop)
+
+    clipboard[bool]: auto send text to clipboard
+
+    border[str]: tex mode, set the table border. 
+        Default as "|"
     
-    jlim: vol limits. Can be stop or (begin, stop)
+    hline[bool, str]: tex mode, set the table border. 
+        Default as True
+
+    caption[str]: tex mode, set the table caption.
+        Default as "实验数据："
     '''
+    df = df.fillna('')  # clean data
     header = list(df.columns)
     IN, JN = df.shape
     I0, J0, In, Jn = 0, 0, IN, JN
@@ -23,64 +56,65 @@ def write_table(df, typ = "tex", ilim=None, jlim=None):
             In = int(ilim)
         except:
             I0, In = ilim
-        I0 = IN+I0 if (I0<0) else I0
-        In = IN+In if (In<=0) else In
+        I0 = IN+I0 if (I0 < 0) else I0
+        In = IN+In if (In <= 0) else In
     if (jlim):
         try:
             Jn = int(jlim)
         except:
             J0, Jn = jlim
-        J0 = JN+J0 if (J0<0) else J0
-        Jn = JN+Jn if (Jn<=0) else Jn
+        J0 = JN+J0 if (J0 < 0) else J0
+        Jn = JN+Jn if (Jn <= 0) else Jn
         print(J0, Jn)
-
 
     if typ == "md":
         out = "|" + "|".join(["{:^7}".format(h) for h in header]) + "|"
         for i in range(In):
             out += "\n|"
             for j in range(Jn):
-                out += "{:^7}|".format((df.iloc[i][j])) if (header[j]=="index") \
-                        else  "{:^7}|".format(df.iloc[i][j])
+                out += "{:^7}|".format((df.iloc[i][j])) if (header[j] == "index") \
+                    else "{:^7}|".format(df.iloc[i][j])
 
-
-    elif typ == "latex" or typ =="tex":
-        out = '''
-\\begin{table}[htbp]
-\t\\centering
-\t\\caption{}
-\t\\label{t:}
-\t\\scalebox{1}{
-\t\t\\begin{tabular}[c]{''' \
-+ "".join(["c"]*(Jn-J0)) + \
-'''}
-\t\t\t\\toprule[1.5pt]
-\t\t\t'''
-        out += "&".join(["{:^7}".format(h) for h in header][J0:Jn])
+    elif typ == "latex" or typ == "tex":
+        if hline == True:
+            hline = '\\hline'
+        elif hline == False:
+            hline = ''
+        # user can config their own hline
+        out = f'''\\begin{{table}}[htbp]
+    \\centering
+    \\caption{{{caption}}}
+    \\label{{t:}}
+    \\scalebox{{1}}{{
+        \\begin{{tabular}}[c]{{{border}''' \
+    + border.join(["c"]*(Jn-J0)) +\
+            f'''{border}}}
+            \\toprule[1.5pt]
+            '''
+        out += "& ".join(["{:^7}".format(h) for h in header][J0:Jn])
         out += "\\\\ \n\t\t\t\\midrule[1pt] \n\t\t\t"
         for i in range(I0, In):
-#             out += "\\\\ \n"
             for j in range(J0, Jn):
                 item = df.iloc[i][j]
-#                 print(type(item), item)
-                if (header[j]=="index"):
+                if (header[j] == "index"):
                     out += " {:^7} &".format(item)
                 elif (isFloat(item)):
-#                     print(item)
                     out += " {:.4f} &".format(item)
-                else:  
+                elif item == "":
+                    out += "&"
+                else:
                     out += " {:^7} &".format(item)
-            out = out[:-1] + "\\\\ \n\t\t\t"
+            out = out[:-1] + "\\\\ " + hline + "\n\t\t\t"
         out = out[:-4] + '''
-\t\t\t\\bottomrule[1.5pt]
-\t\t\\end{tabular}
-\t}
-\\end{table}
-'''
-
+            \\bottomrule[1.5pt]
+        \\end{tabular}
+    }\n\\end{table}'''
+        if clipboard:
+            try:
+                setClipboardData(out)
+            except Exception as e:
+                print("复制到剪贴板失败！", e)
 
     else:
         out = "Wrong Type!!!"
     return out
-    
-    
