@@ -1,11 +1,12 @@
 import setuptools
+from autolatex import __version__
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="autolatex",
-    version="0.1.5",
+    version=__version__,
     author="Benature Wang",
     author_email="wbenature@163.com",
     description="Generate LaTeX code by Python.",
@@ -30,6 +31,6 @@ setuptools.setup(
 '''
 python setup.py sdist bdist_wheel
 pip uninstall autolatex
-pip install -U dist/autolatex-0.1.5-py3-none-any.whl
+pip install -U dist/autolatex-0.1.6-py3-none-any.whl
 twine upload dist/*
 '''

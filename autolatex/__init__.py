@@ -16,6 +16,8 @@ def excel2table():
     if args.type == None:
         args.type = "tex"
 
-    print(args[0])
     df = table.read_excel(args.excel)
     print(table.convert(df, typ=args.type))
+
+
+__version__ = "0.1.6"
