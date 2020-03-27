@@ -1,6 +1,8 @@
 # AutoLaTeX
 
-[Github地址](https://github.com/Benature/AutoLaTeX)
+[![PyPI](https://img.shields.io/pypi/v/autolatex)](https://pypi.org/project/autolatex/)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/autolatex)
+[![GitHub stars](https://img.shields.io/github/stars/Benature/AutoLaTeX)](https://github.com/Benature/AutoLaTeX)
 
 Generate LaTeX code by Python for experiment report.
 
