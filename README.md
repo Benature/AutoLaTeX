@@ -28,19 +28,22 @@ git clone git@github.com:Benature/AutoLaTeX.git
 
 ## Usage 使用
 
-1. `.py`文件内
+1. `.py`文件内  
 ```python
 import autolatex as alt
+from autolatex import table
+df = table.read_excel('data.xlsx')
+print(table.convert(df))
 ```
 
-2. `xlsx`文件 excel 表格数据转 tex 代码
+2. `xlsx`文件 excel 表格数据转 tex 代码  
   在命令行输入（两种写法等效）：
   ```shell
   autolatex --f <文件路径>
   alt --f <文件路径>
   ```
 
-3. word2tex
+3. word2tex  
    详见`word2tex`下的 README
 
 ---
