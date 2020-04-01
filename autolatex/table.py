@@ -5,24 +5,29 @@ SYSTEM = system()
 
 read_excel = pd.read_excel
 
+
 def isFloat(num):
     if "float" in str(type(num)):
         return True
     else:
         return False
 
+
 def setClipboardData(str):
     if SYSTEM == 'Darwin':
         import subprocess
-        data = bytes(str,'utf8')
+        data = bytes(str, 'utf8')
         p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
         p.stdin.write(data)
         p.stdin.close()
         p.communicate()
     elif SYSTEM == 'Windows':
-        import pyperclip
-        pyperclip.copy(str)
-    
+        try:
+            import pyperclip
+            pyperclip.copy(str)
+        except ImportError:
+            print("seems like that you haven't installed pyperclip.\nTry `pip install pyperclip`\n你好像没有安装pyperclip哦\n试试`pip install pyperclip`")
+
 
 def convert(df, typ="tex", ilim=None, jlim=None, clipboard=True,
             border='|', hline=True, caption='实验数据：'):
@@ -40,13 +45,22 @@ def convert(df, typ="tex", ilim=None, jlim=None, clipboard=True,
 
     border[str]: tex mode, set the table border. 
         Default as "|"
-    
+
     hline[bool, str]: tex mode, set the table border. 
         Default as True
 
     caption[str]: tex mode, set the table caption.
         Default as "实验数据："
     '''
+    if hline == True or hline is None:
+        hline = '\\hline'
+    elif hline == False:
+        hline = ''
+
+    caption = '实验数据：' if caption is None else caption
+    border = '|' if border is None else border
+    clipboard = True if clipboard is None else clipboard
+
     df = df.fillna('')  # clean data
     header = list(df.columns)
     IN, JN = df.shape
@@ -75,11 +89,7 @@ def convert(df, typ="tex", ilim=None, jlim=None, clipboard=True,
                 out += "{:^7}|".format((df.iloc[i][j])) if (header[j] == "index") \
                     else "{:^7}|".format(df.iloc[i][j])
 
-    elif typ == "latex" or typ == "tex":
-        if hline == True:
-            hline = '\\hline'
-        elif hline == False:
-            hline = ''
+    elif typ == "latex" or typ == "tex" or typ is None:
         # user can config their own hline
         out = f'''\\begin{{table}}[htbp]
     \\centering
@@ -114,6 +124,7 @@ def convert(df, typ="tex", ilim=None, jlim=None, clipboard=True,
                 setClipboardData(out)
             except Exception as e:
                 print("复制到剪贴板失败！", e)
+        out = out.replace('\t', '    ')
 
     else:
         out = "Wrong Type!!!"

@@ -22,15 +22,15 @@ setuptools.setup(
         ],
     },
     classifiers=(
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ),
 )
 
 '''
-python setup.py sdist bdist_wheel
 pip uninstall autolatex
+python setup.py sdist bdist_wheel
 pip install -U dist/autolatex-0.1.6-py3-none-any.whl
 twine upload dist/*
 '''
