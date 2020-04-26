@@ -14,7 +14,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Benature/AutoLaTeX",
     packages=setuptools.find_packages(),
-    install_requires=['pandas', 'numpy'],
+    install_requires=['pandas', 'numpy', 'pyperclip'],
     entry_points={
         'console_scripts': [
             'autolatex=autolatex:excel2table',

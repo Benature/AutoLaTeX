@@ -13,10 +13,10 @@ def isFloat(num):
         return False
 
 
-def setClipboardData(str):
+def setClipboardData(string):
     if SYSTEM == 'Darwin':
         import subprocess
-        data = bytes(str, 'utf8')
+        data = bytes(string, 'utf8')
         p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
         p.stdin.write(data)
         p.stdin.close()
@@ -24,7 +24,7 @@ def setClipboardData(str):
     elif SYSTEM == 'Windows':
         try:
             import pyperclip
-            pyperclip.copy(str)
+            pyperclip.copy(string)
         except ImportError:
             print("seems like that you haven't installed pyperclip.\nTry `pip install pyperclip`\n你好像没有安装pyperclip哦\n试试`pip install pyperclip`")
 

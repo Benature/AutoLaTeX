@@ -36,21 +36,21 @@ pip install -U dist/autolatex-0.x.x-py3-none-any.whl # 其中 0.x.x 处是 pypi 
 
 ## Usage 使用
 
-1. `.py`文件内  
-   ```python
-   # import autolatex as alt
-   from autolatex import table
-   df = table.read_excel('data.xlsx')
-   print(table.convert(df))
-   ```
-
-2. `xlsx`文件 excel 表格数据转 tex 代码  
+1. `xlsx`文件 excel 表格数据转 tex 代码  
    在命令行输入（两种写法等效）：
    ```shell
    autolatex <文件路径>
    alt <文件路径>
    ```
    更多参数说明请用`alt -h`查询。
+
+2. `.py`文件内  
+   ```python
+   # import autolatex as alt
+   from autolatex import table
+   df = table.read_excel('data.xlsx')
+   print(table.convert(df))
+   ```
 
 3. word2tex  
    详见`word2tex`下的 README
