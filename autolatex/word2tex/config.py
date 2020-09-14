@@ -1,16 +1,16 @@
 # ===================== 路径配置 ============================
 
-folder_path  = "folder/path/"
+folder_path = "folder/path/"
 tex_raw_path = folder_path + "raw.tex"
 tex_out_path = folder_path + "out.tex"
 
 
 # ================== 实验报告表头信息 ============================
 
-stid  = "17353060"
+stid = "173530xx"
 major = "物理学"
 grade = "17级"
-name  = "王本然"
+name = "木一"
 
 
 # ================== tex 导言区设置 ============================

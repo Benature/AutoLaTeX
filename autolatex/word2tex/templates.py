@@ -2,7 +2,7 @@
 It is part of .py file of word2tex
 '''
 
-from config import stid, major, grade, name, preamble
+from .config import stid, major, grade, name, preamble
 
 # ========== table ==========
 
@@ -59,7 +59,7 @@ Unicode2Latex = {
     "·": "cdot",
     "→": "rightarrow",
     "Σ": "Sigma",
-    
+
 }
 
 Unicode2Unicode = {
