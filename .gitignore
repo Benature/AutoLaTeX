@@ -1,10 +1,15 @@
+# configure
+.vscode/
+
+# compile
 build/
 dist/
 autolatex.egg-info/
 
+# Process file
 __pycache__/
 **/.ipynb_checkpoints/
 **/tempCodeRunnerFile.*
 *_ignore.*
 
-word2tex/config.py
+autolatex/word2tex/config.py

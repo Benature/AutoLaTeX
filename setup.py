@@ -30,7 +30,8 @@ setuptools.setup(
 
 '''
 pip uninstall autolatex
+rm -rf ./dist
 python setup.py sdist bdist_wheel
-pip install -U dist/autolatex-0.1.6-py3-none-any.whl
+pip install -U dist/autolatex-0.1.7-py3-none-any.whl
 twine upload dist/*
 '''
