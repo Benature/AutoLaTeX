@@ -58,8 +58,11 @@ pip install -U dist/autolatex-0.x.x-py3-none-any.whl # 其中 0.x.x 处是 pypi 
    ```python
    # import autolatex as alt
    from autolatex import table
-   df = table.read_excel('data.xlsx')
-   print(table.convert(df))
+   import pandas as pd
+
+   df = pd.read_excel('data.xlsx')
+   output = table.convert(df)
+   print(output)
    ```
 
 3. word2tex  
